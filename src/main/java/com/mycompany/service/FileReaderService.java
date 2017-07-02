@@ -33,19 +33,15 @@ public class FileReaderService {
     }
 
     private void processLine(Map<Integer, List<Integer>> stationRouteMap, String line) {
-        try {
-            List<Integer> splittedLine = Arrays.stream(line.split("\\s+"))
-                    .map(Integer::valueOf)
-                    .collect(Collectors.toList());
+        List<Integer> splittedLine = Arrays.stream(line.split("\\s+"))
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
 
-            splittedLine.stream().skip(1).forEach(station -> {
-                if (!stationRouteMap.containsKey(station)) {
-                    stationRouteMap.put(station, new ArrayList<>());
-                }
-                stationRouteMap.get(station).add(splittedLine.get(0));
-            });
-        } catch (Exception e) {
-            logger.error("Can not process string line", e);
-        }
+        splittedLine.stream().skip(1).forEach(station -> {
+            if (!stationRouteMap.containsKey(station)) {
+                stationRouteMap.put(station, new ArrayList<>());
+            }
+            stationRouteMap.get(station).add(splittedLine.get(0));
+        });
     }
 }
