@@ -2,7 +2,6 @@ package com.mycompany;
 
 import com.mycompany.dto.RouteStatus;
 import com.mycompany.service.StationProcessorService;
-import com.mycompany.service.WatcherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

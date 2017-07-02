@@ -4,8 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -64,6 +62,7 @@ public class WatcherService {
                 if (kind == ENTRY_MODIFY &&
                         fileName.toString().equals(file)) {
                     logger.info("My source file has changed!!!");
+                    // or restart application
                     stationProcessorService.initStationRoute();
                 }
             }

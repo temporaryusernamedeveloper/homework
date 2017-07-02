@@ -19,7 +19,6 @@ public class Application implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        boolean containsOption = args.containsOption("file.path");
         watcherService.watchForDirectory();
     }
 
