@@ -22,7 +22,7 @@ public class StationProcessorService {
         Set<Integer> setOfRoutesForDep = stationRouteMap.get(depSid);
         Set<Integer> setOfRoutesForArr = stationRouteMap.get(arrSid);
 
-        return !(setOfRoutesForDep == null || setOfRoutesForArr == null)
+        return stationRouteMap.containsKey(depSid) && stationRouteMap.containsKey(arrSid)
                 && setOfRoutesForDep.stream().anyMatch(setOfRoutesForArr::contains);
     }
 }
