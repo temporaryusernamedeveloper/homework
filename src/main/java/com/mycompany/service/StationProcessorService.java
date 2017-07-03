@@ -5,16 +5,13 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class StationProcessorService {
     @Autowired
     FileReaderService fileReaderService;
-    private Map<Integer, List<Integer>> stationRouteMap = new HashMap<>();
+    private Map<Integer, Set<Integer>> stationRouteMap = new HashMap<>();
 
     @PostConstruct
     public void initStationRoute() {
@@ -22,10 +19,10 @@ public class StationProcessorService {
     }
 
     public boolean isStationConnected(Integer depSid, Integer arrSid) {
-        List<Integer> listOfRoutesForDep = stationRouteMap.get(depSid);
-        List<Integer> listOfRoutesForArr = stationRouteMap.get(arrSid);
+        Set<Integer> setOfRoutesForDep = stationRouteMap.get(depSid);
+        Set<Integer> setOfRoutesForArr = stationRouteMap.get(arrSid);
 
-        return !(listOfRoutesForDep == null || listOfRoutesForArr == null)
-                && !Collections.disjoint(listOfRoutesForDep, listOfRoutesForArr);
+        return !(setOfRoutesForDep == null || setOfRoutesForArr == null)
+                && setOfRoutesForDep.stream().anyMatch(setOfRoutesForArr::contains);
     }
 }
